@@ -15,7 +15,11 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                sh """
+                    docker build \
+                    --build-arg REACT_APP_API_URL=http://15.164.163.6:8088/api \
+                    -t ${DOCKER_IMAGE}:${DOCKER_TAG} .
+                """
             }
         }
 
